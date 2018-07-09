@@ -1,0 +1,20 @@
+Package: datacolor
+Type: Package
+Title: Color Scales for Data Visualization
+Version: 0.0.0.9000
+Depends: R (>= 3.4.3)
+Author: Eric Marty <marty@ericmarty.com>
+Maintainer: Eric Marty <marty@ericmarty.com>
+URL: https://github.com/allopole/datacolor
+BugReports: https://github.com/allopole/datacolor/issues
+Description: This package provides prebuilt color palettes and functions for defining color palettes
+    that are appropriate for data representation.  Color palettes for data should ideally be 
+    perceptually linear in all perceptual color dimensions (hue, chroma or saturation, lightness or 
+    luminance). Additional requirmeents for color scales can include the presence or absence 
+    of discontinuities and corners, maximizing discrimination between levels, and being 
+    color-blind safe.  This package relies in part on the perceptually flat colorspace HCL.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
