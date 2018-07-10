@@ -3,6 +3,7 @@
 #' This function plots a palette as a horizontal colorbar.
 #'
 #' @param p A palette (vector of colors).
+#' @importFrom graphics image
 #' @export
 colorbar <- function(p) {
   L <- length(p)

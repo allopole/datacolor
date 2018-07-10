@@ -43,7 +43,7 @@ p
 colorbar(p)
 
 ## inverted and reversed, with grey center bin:
-p <- AUColors(n=21,invert=T,reverse=T)
+p <- AUColors(n=21,invert=TRUE,reverse=TRUE)
 p
 colorbar(p)
 }

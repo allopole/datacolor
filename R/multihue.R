@@ -54,7 +54,6 @@
 #' stops <- c('#800000', '#CD4949', '#FF9696','#FFFF00')
 #' colorbar(stops) # display stops
 #' palette <- multiHue(1024,colors=stops)
-#' palette
 #' colorbar(palette) # display palette
 #'
 #' ## Divergent (default)
@@ -66,7 +65,7 @@
 #' colorbar(leftstops)
 #' rightstops <- c("#F3F300","#FF8CB4","#CD4C4C","#8F0000")
 #' colorbar(rightstops)
-#' palette <- multiHue.diverge(1024,leftstops,rightstops,continuous=F)
+#' palette <- multiHue.diverge(1024,leftstops,rightstops,continuous=FALSE)
 #' colorbar(palette)
 #'
 #' ## Constant Lightness (and chroma) color palette:
@@ -77,7 +76,7 @@
 
 multiHue <- function(n=11,colors=c("#081d58", "#086699", "#08BEC1", "#ffff66")) {
   context <- V8::v8()
-  context$source("inst/js/chroma.min.js")
+  context$source(system.file("js", "chroma.min.js", package = "datacolor"))
   context$assign("n", n)
   context$assign("colors", array(colors))
   palette <- context$eval("chroma.bezier(colors).scale().mode('lab').correctLightness().colors(n);")
@@ -105,7 +104,7 @@ multiHue.diverge <- function(n=11,
   e <- !(n%%2) # even flag
 
   context <- V8::v8()
-  context$source("inst/js/chroma.min.js")
+  context$source(system.file("js", "chroma.min.js", package = "datacolor"))
   context$assign("m", m)
   context$assign("lcolors", array(lcolors))
   context$assign("rcolors", array(rcolors))
@@ -125,7 +124,7 @@ multiHue.constantL <- function(n=11,h=c(0,-45,-90,-135),c=50,l=60) {
   }
   colors <- grDevices::hcl(h=h,c=c,l=l[1])
   context <- V8::v8()
-  context$source("inst/js/chroma.min.js")
+  context$source(system.file("js", "chroma.min.js", package = "datacolor"))
   context$assign("n", n)
   context$assign("colors", array(colors))
   palette <- context$eval("chroma.bezier(colors).scale().mode('lab').colors(n);")

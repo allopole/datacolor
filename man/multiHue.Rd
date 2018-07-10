@@ -80,7 +80,6 @@ colorbar(p)
 stops <- c('#800000', '#CD4949', '#FF9696','#FFFF00')
 colorbar(stops) # display stops
 palette <- multiHue(1024,colors=stops)
-palette
 colorbar(palette) # display palette
 
 ## Divergent (default)
@@ -92,7 +91,7 @@ leftstops <- c("#3136AA","#3980B0","#00C5C0","#8EFDFD")
 colorbar(leftstops)
 rightstops <- c("#F3F300","#FF8CB4","#CD4C4C","#8F0000")
 colorbar(rightstops)
-palette <- multiHue.diverge(1024,leftstops,rightstops,continuous=F)
+palette <- multiHue.diverge(1024,leftstops,rightstops,continuous=FALSE)
 colorbar(palette)
 
 ## Constant Lightness (and chroma) color palette:
