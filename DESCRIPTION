@@ -14,7 +14,9 @@ Description: This package provides prebuilt color palettes and functions for def
     color-blind safe.  This package relies in part on the perceptually flat colorspace HCL.
 Depends: R (>= 3.4.3)
 Imports:
-    colorspace (>= 1.3-2)
+    grDevices,
+    colorspace (>= 1.3-2),
+    V8 (>= 1.5)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

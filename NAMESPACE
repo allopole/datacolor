@@ -2,4 +2,7 @@
 
 export(AUColors)
 export(colorbar)
+export(multiHue)
+export(multiHue.constantL)
+export(multiHue.diverge)
 importFrom(colorspace,diverge_hcl)
