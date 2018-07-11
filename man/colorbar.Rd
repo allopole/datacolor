@@ -4,10 +4,12 @@
 \alias{colorbar}
 \title{Display a palette as a color bar.}
 \usage{
-colorbar(p)
+colorbar(p, dots = FALSE)
 }
 \arguments{
 \item{p}{A palette (vector of colors).}
+
+\item{dots}{Logical. If \code{circles=TRUE}, a row of circles will be drawn instead of a bar.}
 }
 \description{
 This function plots a palette as a horizontal colorbar.
