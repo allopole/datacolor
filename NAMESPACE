@@ -2,9 +2,11 @@
 
 export(AUColors)
 export(colorbar)
+export(colorblind)
 export(colorplot)
 export(cyclic_hcl)
 export(cyclx)
+export(hex2hcl)
 export(multiHue)
 export(multiHue.constantL)
 export(multiHue.diverge)
