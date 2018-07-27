@@ -16,7 +16,9 @@ Depends: R (>= 3.4.3)
 Imports:
     grDevices,
     colorspace (>= 1.3-2),
-    V8 (>= 1.5)
+    V8 (>= 1.5),
+    dichromat (>= 2.0-0)
+Suggests: viridis
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
