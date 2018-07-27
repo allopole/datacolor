@@ -45,7 +45,7 @@
 #' @param l Numeric. (Only used with `multiHue.constantL`.) Brightness value for color stops.
 #'
 #' @return character vector. A vector of RGB colors specified as hex color codes (#RRGGBB).
-#' @import grDevices
+#' @importFrom grDevices hcl
 #' @examples
 #' p <- multiHue()
 #' colorbar(p)
@@ -83,7 +83,7 @@ multiHue <- function(n=11,colors=c("#081d58", "#086699", "#08BEC1", "#ffff66")) 
   return(unlist(strsplit(palette, split=",")))
 }
 
-##' @rdname multiHue
+#' @rdname multiHue
 #' @export
 multiHue.diverge <- function(n=11,
                              lcolors = c('#0000d0', '#0479C8', '#08C8C8','#ffff00'),
@@ -116,7 +116,7 @@ multiHue.diverge <- function(n=11,
   return(palette)
 }
 
-##' @rdname multiHue
+#' @rdname multiHue
 #' @export
 multiHue.constantL <- function(n=11,h=c(0,-45,-90,-135),c=50,l=60) {
   if (length(l)>1) {
