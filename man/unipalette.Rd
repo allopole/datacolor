@@ -21,15 +21,17 @@ character vector. A vector of named RGB colors specified as hex color codes (#RR
 \code{unipalette()} produces qualitative palettes based on a preset 7-color palette optimized for
 lines, points, bars, etc, on a white background.
 }
-\details{
-Base palette, in default ordering:
+\section{Base palette, in default ordering}{
+
 
 #' \tabular{lllllll}{
 red \tab lightblue \tab black \tab green \tab purple \tab pink \tab blue \cr
 "#a11c3e"\tab"#5798d1"\tab"#252525"\tab"#319045"\tab"#5e2b7b"\tab"#e2908c"\tab"#226e83"
 }
+}
 
-Palette characteristics:
+\section{Palette characteristics}{
+
 \itemize{
 \item designed for high contrast against a white background, with good distinction among colors
 \item colors distinguishable under two most common forms of colorblindness
@@ -42,6 +44,10 @@ Palette characteristics:
 The default ordering (\code{order="difference"}) maximizes differences in hue and lightness between adjacent
 colors. This aids discrimination of data plotted side by side, and also helps avoid implications
 that the data is ordinal.
+}
+
+\section{Palette ordering}{
+
 
 Two alternate orderings are also provided.
 \itemize{
@@ -51,19 +57,29 @@ black    purple       red      blue     green lightblue      pink
 lightness-ordered palette:
 black       red    purple     green      blue      pink lightblue
 }
+}
 
-Palette subsets
+\section{Palette subsets}{
+
 
 \code{unipalette(4)} returns the first 4 colors of the default ordering.
 \code{unipalette(2:5)} returns the colors 2 through 5 of the default ordering.
 \code{unipalette(c("red","lightblue","purple"))} returns the named colors in the order given.
 }
+
 \examples{
 ## 3 orderings:
-difference <- unipalette(); colorbar(diff,dots=TRUE)
+difference <- unipalette(); colorbar(difference,dots=TRUE)
 lightness <- unipalette(order="lightness"); colorbar(lightness,dots=TRUE)
 hybrid <- unipalette(order="hybrid"); colorbar(hybrid,dots=TRUE)
 
 ## subsets
-p <- unipalette(4); colorbar(p,dots=TRUE)
+subset <- unipalette(4); colorbar(subset,dots=TRUE)
+
+## Sample plot
+randomseries <- data.frame(x=1:4, y=runif(4*7), grp=rep(letters[1:7],each=4))
+pal <- unipalette()
+lattice::xyplot(y~x, group=grp, data=randomseries, type="b", pch=16, lwd=3, col = pal,
+       key = list(space = "right", text=list(letters[1:7], lines = list(col=pal, lwd=3)))
+       )
 }
