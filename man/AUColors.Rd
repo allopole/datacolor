@@ -31,10 +31,13 @@ yellower colors.
 \details{
 Palette characteristics:
 \itemize{
-\item color-blind-safe
+\item color-blind-safe (under three most common forms of colorblindness)
 \item perceptually linear
 \item equal brightness gradients on both sides of central value
 \item constant hue and chroma on either side of central value
+\item Dark value for no correlation (near 0.5); bright values for high correlation (near 1 and 0)
+\item Blue for positive correlation (1); orange for negative correlation (0)
+\item NOT suitable for b/w printing, as low and high values are not distinguishable in greyscale
 }
 }
 \examples{
@@ -42,8 +45,15 @@ p <- AUColors()
 p
 colorbar(p)
 
+# Sample AUC Heat Map
+randommatrix <- matrix(runif(12*6),ncol=6)
+nlevels <- 10
+levelplot(randommatrix,
+  at = seq(0,1,1/nlevels), # number of breaks
+  col.regions = AUColors(), # color map
+  aspect = "iso")
+
 ## inverted and reversed, with grey center bin:
 p <- AUColors(n=21,invert=TRUE,reverse=TRUE)
-p
 colorbar(p)
 }
