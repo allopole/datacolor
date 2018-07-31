@@ -3,7 +3,7 @@
 \name{colorbar}
 \alias{colorbar}
 \alias{colorplot}
-\title{Display a palette as a color bar and plot Hue Chroma and Lightness}
+\title{Display a palette, simulate colorblindness and greyscale, plot Hue Chroma and Lightness}
 \usage{
 colorbar(palette, dots = FALSE, colorblind = FALSE)
 
@@ -12,10 +12,10 @@ colorplot(palette, dots = FALSE, colorblind = FALSE)
 \arguments{
 \item{palette}{Character vector. A palette (vector of hex RGB or RGBA colors).}
 
-\item{dots}{Logical. If \code{circles=TRUE}, a row of circles will be drawn instead of a colorbar.}
+\item{dots}{Logical. If \code{dots=TRUE}, a row of circles (dots) will be drawn instead of a colorbar.}
 
-\item{colorblind}{Logical. If \code{colorblind=FALSE}, colorbars (or dots) for three common types of
-colorblindness will also be displayed: deuteranopia, protanopia and tritanopia.}
+\item{colorblind}{Logical. If \code{colorblind=TRUE}, colorbars (or dots) for three common types of
+colorblindness (deuteranopia, protanopia and tritanopia) and greyscale will also be displayed.}
 }
 \description{
 \code{colorbar()} displays a palette as a horizontal colorbar. \code{colorplot()} displays a palette as a
@@ -23,6 +23,8 @@ horizontal colorbar and plots its Hue (H), Chroma (C) and Lightness (L). HCL is 
 uniform colorspace.
 }
 \details{
+Both functions can also simulate greyscale printing and three forms of colorblindness.
+
 The input palette must be a character vector of colors as 'hex' RGB or RGBA strings
 (e.g."#006633" or "#006633FF"), such as produced by most color functions in R.
 

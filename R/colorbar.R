@@ -1,8 +1,10 @@
-#' Display a palette as a color bar and plot Hue Chroma and Lightness
+#' Display a palette, simulate colorblindness and greyscale, plot Hue Chroma and Lightness
 #'
 #' `colorbar()` displays a palette as a horizontal colorbar. `colorplot()` displays a palette as a
 #' horizontal colorbar and plots its Hue (H), Chroma (C) and Lightness (L). HCL is a perceptually
 #' uniform colorspace.
+#'
+#' Both functions can also simulate greyscale printing and three forms of colorblindness.
 #'
 #' The input palette must be a character vector of colors as 'hex' RGB or RGBA strings
 #' (e.g."#006633" or "#006633FF"), such as produced by most color functions in R.
@@ -18,9 +20,9 @@
 #' accurately represents the palette as it will be displayed on screen, with any artifacts.
 #'
 #' @param palette Character vector. A palette (vector of hex RGB or RGBA colors).
-#' @param dots Logical. If `circles=TRUE`, a row of circles will be drawn instead of a colorbar.
-#' @param colorblind Logical. If `colorblind=FALSE`, colorbars (or dots) for three common types of
-#' colorblindness will also be displayed: deuteranopia, protanopia and tritanopia.
+#' @param dots Logical. If `dots=TRUE`, a row of circles (dots) will be drawn instead of a colorbar.
+#' @param colorblind Logical. If `colorblind=TRUE`, colorbars (or dots) for three common types of
+#' colorblindness (deuteranopia, protanopia and tritanopia) and greyscale will also be displayed.
 #' @import graphics
 #' @import dichromat
 #' @importFrom colorspace hex2RGB
@@ -40,33 +42,76 @@
 #' colorplot(pal,dots=TRUE,colorblind=TRUE)
 #'
 #' @export
+
+# colorbar <- function(palette, dots=FALSE, colorblind=FALSE) {
+#   p <- palette
+#   if(colorblind){p.concat <- unlist(colorblind(palette), use.names = FALSE)}
+#   L <- length(p)
+#   par(mar=c(1, 4, 0, 2) + 0.1, oma=c(4,0,0,2))
+#
+#   if(dots==FALSE){
+#     graphics::plot.default(0,0, type="n", axes=FALSE, ann=FALSE,
+#                            xlim=c(.5,L+.5),ylim = c(-.5,4.5) #, ylim=c(-.5,.5)
+#                            )
+#     if(colorblind){
+#       graphics::image(1:L,1:4,matrix(1:(L*4),L,4), col=p.concat, add=TRUE)
+#       axis(2,las=1,lwd=0,pos=.5,at=1:4,labels = c("normal","deuter.","prot.","trit."))
+#     } else {
+#       graphics::image(1:L,1,as.matrix(1:L), col=p, add=TRUE)
+#     }
+#   } else {
+#     graphics::plot.default(seq_along(p), type="n",axes=FALSE, ann=FALSE, asp=1,
+#                            xlim=c(.5,L+.5), ylim=c(-.5,colorblind*3+0.5)
+#                            )
+#     if(colorblind){
+#       for(i in 0:3){
+#         graphics::symbols(add=TRUE,x = 1:L,y = rep_len(i,L),
+#                           circles = rep_len(.5,L), inches=FALSE,fg="#00000000",
+#                           bg=p.concat[i*L+1:(L+(L*i))])
+#       }
+#       axis(2,las=1,lwd=0,pos=.5,at=0:3,labels = c("normal","deuter.","prot.","trit."))
+#     } else {
+#       graphics::symbols(add=TRUE,x = 1:L,y = rep_len(0,L),
+#                         circles = rep_len(.5,L), inches=FALSE,fg="#00000000",
+#                         bg=p)
+#     }
+#   }
+#   if(anyNA(palette)){warning("Palette contains at least one NA.")}
+#   if(length(unique(palette))<length(palette)){warning("Palette may contain duplicate colors.")}
+# }
+
 colorbar <- function(palette, dots=FALSE, colorblind=FALSE) {
   p <- palette
-  if(colorblind){p.concat <- unlist(colorblind(palette), use.names = FALSE)}
   L <- length(p)
-  par(mar=c(1, 4, 0, 2) + 0.1, oma=c(4,0,0,2))
+  np <- 1
+
+  if(colorblind){
+    p.list <- colorblind(p)
+    p.concat <- unlist(p.list, use.names = FALSE)
+    np <- length(p.list)
+  }
+
+  par(mar=c(1, 5, 0, 2) + 0.1, oma=c(4,0,0,2))
 
   if(dots==FALSE){
     graphics::plot.default(0,0, type="n", axes=FALSE, ann=FALSE,
-                           xlim=c(.5,L+.5),ylim = c(-.5,4.5) #, ylim=c(-.5,.5)
-                           )
+                           xlim=c(.5,L+.5),ylim = c(-.5,np+.5))
     if(colorblind){
-      graphics::image(1:L,1:4,matrix(1:(L*4),L,4), col=p.concat, add=TRUE)
-      axis(2,las=1,lwd=0,pos=.5,at=1:4,labels = c("normal","deuter.","prot.","trit."))
+      graphics::image(1:L,1:np,matrix(1:(L*np),L,np), col=p.concat, add=TRUE)
+      axis(2,las=1,lwd=0,pos=.5,at=1:np,labels = names(p.list),cex.axis=.8)
     } else {
       graphics::image(1:L,1,as.matrix(1:L), col=p, add=TRUE)
     }
   } else {
     graphics::plot.default(seq_along(p), type="n",axes=FALSE, ann=FALSE, asp=1,
-                           xlim=c(.5,L+.5), ylim=c(-.5,colorblind*3+0.5)
-                           )
+                           xlim=c(.5,L+.5), ylim=c(-.5,colorblind*(np-1)+0.5)) # or (np)
     if(colorblind){
-      for(i in 0:3){
+      for(i in 0:(np-1)){
         graphics::symbols(add=TRUE,x = 1:L,y = rep_len(i,L),
                           circles = rep_len(.5,L), inches=FALSE,fg="#00000000",
                           bg=p.concat[i*L+1:(L+(L*i))])
       }
-      axis(2,las=1,lwd=0,pos=.5,at=0:3,labels = c("norm","deuter","prot","trit"))
+      axis(2,las=1,lwd=0,pos=.5,at=0:(np-1),labels = names(p.list),cex.axis=.8)
     } else {
       graphics::symbols(add=TRUE,x = 1:L,y = rep_len(0,L),
                         circles = rep_len(.5,L), inches=FALSE,fg="#00000000",
