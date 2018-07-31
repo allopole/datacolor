@@ -14,7 +14,6 @@
 #' @return character vector. A vector of RGB colors specified as hex color codes (#RRGGBB).
 #' @examples
 #' colorplot(heat(128))
-
 #' @export
 
 heat <- function(n=10){
