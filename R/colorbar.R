@@ -130,14 +130,15 @@ colorplot <- function(palette,dots=FALSE,colorblind=FALSE) {
   p.hcl <- hex2hcl(p)
   na.i <- which(is.na(p))
   L <- length(p)
-  l.max <- max(p.hcl$L,na.rm=TRUE) # max(p.hcl@coords[,"L"],na.rm=TRUE)
-  c.max <- max(p.hcl$C,na.rm=TRUE) # max(p.hcl@coords[,"C"],na.rm=TRUE)
+  l.max <- max(p.hcl$L,na.rm=TRUE)
+  c.max <- max(p.hcl$C,na.rm=TRUE)
 
   if(colorblind){
     p.list <- colorblind(p)
     p.deuter.hcl <- hex2hcl(p.list$deuteranopia)
-    p.prot.hcl <- hex2hcl(p.list$protanopia) # as.data.frame(hex2hcl(p.list$protanopia)@coords)
-    p.trit.hcl <- hex2hcl(p.list$tritanopia) # as.data.frame(hex2hcl(p.list$tritanopia)@coords)
+    p.prot.hcl <- hex2hcl(p.list$protanopia)
+    p.trit.hcl <- hex2hcl(p.list$tritanopia)
+    p.grey.hcl <- hex2hcl(p.list$greyscale)
   }
 
   # visual variables
@@ -154,11 +155,11 @@ colorplot <- function(palette,dots=FALSE,colorblind=FALSE) {
   na.col <- "#000000DD"
   pscale <- max(1,16/L)
   xaxis <- seq(1,L,2^max(floor(log2(L))-4,0))
-  legend <- c("normal","deuter.","prot.","trit.")
-  lwd <- c(2,1.5,1.5,1.5)
+  if(colorblind){legend <- names(p.list)}
+  lwd <- c(2,1.5,1.5,1.5,2)
   #lty <- c(1,1,"44","1484")
-  lty <- c(1,1,2,4)
-  line.col <- c("#000000","#00000060","#0000FF60","#FF000060")
+  lty <- c(1,1,2,4,3)
+  line.col <- c("#000000","#00AA0060","#0000FF60","#FF000060","#00000060")
   grid.lwd <- .25
   grid.col <- grey(.75)
   grid.lty <- 1
@@ -182,6 +183,7 @@ colorplot <- function(palette,dots=FALSE,colorblind=FALSE) {
     graphics::lines(vpad(p.deuter.hcl$L),type="s",col=line.col[2],lwd=lwd[2],lty=lty[2])
     graphics::lines(vpad(p.prot.hcl$L),type="s",col=line.col[3],lwd=lwd[3],lty=lty[3])
     graphics::lines(vpad(p.trit.hcl$L),type="s",col=line.col[4],lwd=lwd[4],lty=lty[4])
+    graphics::lines(vpad(p.grey.hcl$L),type="s",col=line.col[5],lwd=lwd[5],lty=lty[5])
     graphics::legend("top",horiz=TRUE,xpd=NA,inset=-.2,bty="n",legend = legend,col=line.col,lwd=lwd,lty=lty)
   }
   if(anyNA(palette)){graphics::rect(na.i,min(l.ticks),na.i+1,max(l.ticks),col=na.col,border=NA)}
