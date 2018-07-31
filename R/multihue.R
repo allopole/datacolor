@@ -1,11 +1,12 @@
 #' Multi-hue color scales
 #'
-#' `multihue()` and `multihue.diverge()` address the problem of creating multi-hue (multi "stop")
-#' color scales with perceptually linear brightness gradients and smooth hue gradients.
+#' `multihue()`, `multihue.diverge()` address the problem of creating multi-hue (multi "stop")
+#' color scales with perceptually linear lightness gradients and smooth hue and chroma gradients
+#' (with no first or second order discontinuities).
 #'
 #' Pallettes produced by `multihue()`, `multihue.diverge()` and `multihue.constantL()` use bezier
 #' interpolation in HCL space to produce smooth, transient-free color scales. After interpolation,
-#' the scales are stretched to counter any non-linearity in brightness gradient introduced by the
+#' the scales are stretched to correct any non-linearity in brightness gradient introduced by the
 #' presence of intermediate color "stops." The result is a perceptually linear brightness gradient,
 #' even when printed in black and white.
 #'
