@@ -47,6 +47,7 @@ hcl2hex <- function(hcl=NULL,H=NULL,C=NULL,L=NULL){
 #' @param palette Character vector. A palette (vector of hex RGB or RGBA colors).
 #' @return List of four hex color palettes: `$normal`, `$deuteranopia`, `$protanopia`, `$tritanopia`
 #' @import dichromat
+#' @importFrom colorspace desaturate
 #' @export
 
 colorblind <- function(palette) {
@@ -56,7 +57,8 @@ colorblind <- function(palette) {
     normal = palette,
     deuteranopia = dichromat::dichromat(palette,type="deutan"),
     protanopia = dichromat::dichromat(palette,type="protan"),
-    tritanopia = dichromat::dichromat(palette,type="tritan")
+    tritanopia = dichromat::dichromat(palette,type="tritan"),
+    greyscale = colorspace::desaturate(palette)
   )
   p.mat[is.na(palette),] <- NA
   p.list <- split(p.mat, col(p.mat))
