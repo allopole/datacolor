@@ -1,7 +1,9 @@
+datacolor
+================
+Éric Marty
+August 1, 2018
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# datacolor
 
 Color for Data Visualization
 

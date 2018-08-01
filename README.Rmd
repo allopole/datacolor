@@ -1,4 +1,7 @@
 ---
+title: "datacolor"
+author: Éric Marty
+date: August 1, 2018
 output: github_document
 ---
 
@@ -11,8 +14,6 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-
-# datacolor
 
 Color for Data Visualization
 
