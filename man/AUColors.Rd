@@ -48,7 +48,7 @@ colorbar(p)
 # Sample AUC Heat Map
 randommatrix <- matrix(runif(12*6),ncol=6)
 nlevels <- 10
-levelplot(randommatrix,
+lattice::levelplot(randommatrix,
   at = seq(0,1,1/nlevels), # number of breaks
   col.regions = AUColors(), # color map
   aspect = "iso")

@@ -10,7 +10,7 @@
 hex2hcl <- function(palette){
   p <- palette
   p[is.na(p)] <- "#00000000"
-  p.hcl <- as(colorspace::hex2RGB(p), "polarLUV") # import classes?
+  p.hcl <- methods::as(colorspace::hex2RGB(p), "polarLUV") # import classes?
   p.hcl <- as.data.frame(p.hcl@coords)
   p.hcl[is.na(palette),] <- NA
   return(p.hcl)
@@ -24,7 +24,7 @@ hex2hcl <- function(palette){
 #' @param hcl Optional data frame with three columns: `$H`, `$C`, `$L`. (default = `NULL`)
 #' @param H Numeric. Hue angle (mod 360).
 #' @param C Numeric. Chroma.  Minimum value = 0.  Maximum possible depends on Hue and Lightness (about 100 to 150)
-#' @param H Numeric. Lightness (0 to 100)
+#' @param L Numeric. Lightness (0 to 100)
 #' @return Character vector. A palette (vector of hex RGB colors).
 #' @importFrom grDevices hcl
 #' @export
@@ -46,7 +46,7 @@ hcl2hex <- function(hcl=NULL,H=NULL,C=NULL,L=NULL){
 #'
 #' @param palette Character vector. A palette (vector of hex RGB or RGBA colors).
 #' @return List of four hex color palettes: `$normal`, `$deuteranopia`, `$protanopia`, `$tritanopia`
-#' @import dichromat
+#' @import dichromat methods
 #' @importFrom colorspace desaturate
 #' @export
 

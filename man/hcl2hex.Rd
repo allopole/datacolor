@@ -13,7 +13,7 @@ hcl2hex(hcl = NULL, H = NULL, C = NULL, L = NULL)
 
 \item{C}{Numeric. Chroma.  Minimum value = 0.  Maximum possible depends on Hue and Lightness (about 100 to 150)}
 
-\item{H}{Numeric. Lightness (0 to 100)}
+\item{L}{Numeric. Lightness (0 to 100)}
 }
 \value{
 Character vector. A palette (vector of hex RGB colors).

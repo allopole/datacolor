@@ -26,7 +26,7 @@
 #' @import graphics
 #' @import dichromat
 #' @importFrom colorspace hex2RGB
-#' @importFrom grDevices hcl
+#' @importFrom grDevices hcl grey
 #' @examples
 #' # Draw a colorbar or row of dots
 #' pal <- grDevices::rainbow(36)
@@ -151,7 +151,7 @@ colorplot <- function(palette,dots=FALSE,colorblind=FALSE) {
                  to = max(100,c.inc*ceiling(c.max/c.inc)),
                  by = c.inc)
   h.ticks <- seq(-360,360,h.inc)
-  bg <- grey(.98)
+  bg <- grDevices::grey(.98)
   na.col <- "#000000DD"
   pscale <- max(1,16/L)
   xaxis <- seq(1,L,2^max(floor(log2(L))-4,0))
@@ -161,7 +161,7 @@ colorplot <- function(palette,dots=FALSE,colorblind=FALSE) {
   lty <- c(1,1,2,4,3)
   line.col <- c("#000000","#00AA0060","#0000FF60","#FF000060","#00000060")
   grid.lwd <- .25
-  grid.col <- grey(.75)
+  grid.col <- grDevices::grey(.75)
   grid.lty <- 1
 
   # init figure
