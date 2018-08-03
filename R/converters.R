@@ -13,7 +13,7 @@ hex2hcl <- function(palette){
   p.hcl <- methods::as(colorspace::hex2RGB(p), "polarLUV") # import classes?
   p.hcl <- as.data.frame(p.hcl@coords)
   p.hcl[is.na(palette),] <- NA
-  return(p.hcl)
+  return(rev(p.hcl))
 }
 
 #' Convert an HCL palette to hex RGB
