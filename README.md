@@ -6,6 +6,34 @@ August 1, 2018
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 Color for Data Visualization
+<!-- https://ecotrust-canada.github.io/markdown-toc/ -->
+
+# Table of Contents
+
+  - [Introduction](#introduction)
+      - [Installation](#installation)
+  - [Analysis and display of
+    palettes](#analysis-and-display-of-palettes)
+  - [Converters](#converters)
+      - [Hex RGB to HCL](#hex-rgb-to-hcl)
+      - [Hex RGB palette to simulated colorblind hex
+        RGB](#hex-rgb-palette-to-simulated-colorblind-hex-rgb)
+  - [Precalculated palettes](#precalculated-palettes)
+      - [7 category qualitative palette for nominal
+        data](#7-category-qualitative-palette-for-nominal-data)
+      - [Sequential palette for
+        heatmaps](#sequential-palette-for-heatmaps)
+          - [Comparison of Heat Palettes](#comparison-of-heat-palettes)
+      - [Divergent colorscale for AUC
+        heatmaps](#divergent-colorscale-for-auc-heatmaps)
+  - [HCL Palettes with power curves, stepped and cyclic
+    elements](#hcl-palettes-with-power-curves-stepped-and-cyclic-elements)
+  - [Multihue HCL Palettes with bezier interpolation and lightness
+    correction](#multihue-hcl-palettes-with-bezier-interpolation-and-lightness-correction)
+      - [Comparison with non-bezier multi-hue
+        palettes](#comparison-with-non-bezier-multi-hue-palettes)
+
+# Introduction
 
 This package provides
 
@@ -40,7 +68,7 @@ Install the `datacolor` package from github:
 # devtools::install_github("allopole/datacolor")
 ```
 
-## Analysis and display of palettes
+# Analysis and display of palettes
 
 See `?colorbar` for description of `colorbar` and `colorplot` functions
 
@@ -97,9 +125,9 @@ colorplot(pal,dots=TRUE,colorblind=TRUE)
 
 ![](README-colorplot-4.png)<!-- -->
 
-## Converters
+# Converters
 
-### Hex RGB(A) to HCL
+## Hex RGB to HCL
 
 See `?hex2hcl`
 
@@ -116,7 +144,7 @@ hex2hcl(pal)
 #> 7 58.39541 128.42964 320.66953
 ```
 
-### Hex RGB palette to simulated colorblind hex RGB
+## Hex RGB palette to simulated colorblind hex RGB
 
 See `?colorblind`
 
@@ -144,9 +172,9 @@ colorplot(colorblind(pal)$deuteranopia)
 
 ![](README-colorblind-1.png)<!-- -->
 
-## Precalculated palettes
+# Precalculated palettes
 
-### 7-category qualitative palette for nominal data
+## 7 category qualitative palette for nominal data
 
 See `?unipalette` for details
 
@@ -173,7 +201,7 @@ lattice::xyplot(y~x, group=grp, data=randomseries, type="b", pch=16, lwd=3, col 
 
 ![](README-unipalette-1.png)<!-- -->![](README-unipalette-2.png)<!-- -->
 
-### A Sequential palette for heatmaps
+## Sequential palette for heatmaps
 
 A replacement for `grDevices::heat.colors()` or `colorspace::heat_hcl()`
 
@@ -198,7 +226,7 @@ mtext("datacolor::heat()", side=1, line = 2.5)
 
 ![](README-heat-1.png)<!-- -->
 
-#### Comparison of Heat Palettes
+### Comparison of Heat Palettes
 
 ``` r
 n <- 128
@@ -244,7 +272,7 @@ mtext("datacolor::multiHue(128,c('#800000', '#CD4949', '#FF9696','#FFFF00'))", s
 
 ![](README-heat_comparison-5.png)<!-- -->
 
-### A divergent colorscale for AUC (Area Under the Curve) heatmaps
+## Divergent colorscale for AUC heatmaps
 
 See `?AUColors` for details
 
@@ -294,7 +322,7 @@ lattice::levelplot(randommatrix,
 
 ![](README-AUC-3.png)<!-- -->
 
-## HCL Palettes with power curves, stepped and cyclic elements
+# HCL Palettes with power curves, stepped and cyclic elements
 
 Use `rampx()`, `stepx()`, and `cyclx()` to construct numeric vectors of
 `H`, `C`, and `L`.
@@ -323,7 +351,7 @@ colorplot(pal)
 
 ![](README-cyclx-1.png)<!-- -->
 
-## Multihue HCL Palettes (with bezier interpolation and lightness correction)
+# Multihue HCL Palettes with bezier interpolation and lightness correction
 
 `multihue()`, `multihue.diverge()` and `multihue.constantL()` create
 multi-hue (multi “stop”) color scales with perceptually linear lightness
@@ -423,7 +451,7 @@ colorplot(palette,colorblind=TRUE)
 
 ![](README-multiHue-6.png)<!-- -->
 
-### Comparison with non-bezier multi-hue palettes
+## Comparison with non-bezier multi-hue palettes
 
 By comparison, here is the “rainbow” palette showing discontinuities
 typical of multi-hule palettes. This palette includes corners (second

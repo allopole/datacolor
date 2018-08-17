@@ -1,15 +1,10 @@
 # datacolor 0.0.1.9000
 
-* fixing yaml in readme
+* fixed yaml in readme
+* new functions: `color2hex()`, `color2hcl()`, `colorchart()`
+* fix order of dataframe output from `hex2hcl()`
 
 # datacolor 0.0.1
 
 * Initial release
 * Depricated `cyclic_hcl()`
-
-# datacolor 0.0.0.9000
-
-* Added a `NEWS.md` file to track changes to the package.
-
-
-
